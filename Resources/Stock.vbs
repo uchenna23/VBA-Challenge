@@ -42,9 +42,9 @@ If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
     
     Ticker = ws.Cells(i, 1).Value
           
-    ws.Range("I" & Summary_Table).Value = Ticker
+    ws.Cells(i, 9).Value = Ticker
        
-    ws.Range("L" & Summary_Table).Value = Total_Volume
+    ws.Cells(i, 12).Value = Total_Volume
 
    Total_Volume = 0
 
