@@ -12,10 +12,10 @@ ws.Range("L1").Value = "Total Stock Volume"
 
 
 Dim Ticker As String
-Dim LastRow As Long
+Dim LastRow As Double
         
-Dim Total_Stock_Volume As Double
-Total_Stock_Volume = 0
+Dim Total_Volume As Double
+Total_Volume = 0
         
 Dim Summary_Table As Long
 Summary_Table = 2
@@ -26,7 +26,7 @@ Dim Close_Price As Double
 Dim Yearly_Change As Double
 Dim Percent_Change As Double
 
-Dim Last_Price As Long
+Dim Last_Price As Double
 Last_Price = 2
        
         
@@ -36,7 +36,7 @@ LastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
         
 For i = 2 To LastRow
 
-Total_Stock_Volume = Total_Stocke_Volume + ws.Cells(i, 7).Value
+Total_Volume = Total_Volume + ws.Cells(i, 7).Value
 
 If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
     
@@ -44,25 +44,25 @@ If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
           
     ws.Range("I" & Summary_Table).Value = Ticker
        
-    ws.Range("L" & Summary_Table).Value = Total_Stock_Volume
+    ws.Range("L" & Summary_Table).Value = Total_Volume
 
-    Total_Stock_Volume = 0
+   Total_Volume = 0
 
 
-    Open_Price = ws.Range("C" & Last_Price)
-    Close_Price = ws.Range("F" & i)
-    Yearly_Change = Close_Price - Open_Price
-    ws.Range("J" & Summary_Table).Value = Yearly_Change
+    Open_Price = ws.Cells(i, 3).Value
+    Close_Price = ws.Cells(i, 6).Value
+    Yearly_Change = (Close_Price - Open_Price)
+    ws.Cells(i, 10).Value = Yearly_Change
 
     
 If Open_Price = 0 Then
     Percent_Change = 0
 Else
-    Open_Price = ws.Range("C" & Last_Price)
+    Open_Price = ws.Cells(i, 3).Value
     Percent_Change = Yearly_Change / Open_Price
 End If
 
-ws.Range("K" & Summary_Table).NumberFormat = "00.00%"
+ws.Range("K" & Summary_Table).NumberFormat = "0.00%"
 ws.Range("K" & Summary_Table).Value = Percent_Change
 
                 
